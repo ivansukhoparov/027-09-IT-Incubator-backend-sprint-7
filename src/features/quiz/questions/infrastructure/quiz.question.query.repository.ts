@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
-import { QuizQuestionEntity } from './entities/quiz.question.entity';
+import { QuizQuestion } from './entities/quiz.question.entity';
 import { query } from 'express';
 import { ERRORS_CODES, InterlayerNotice } from '../../../../base/models/interlayer.notice';
 import { QuizQuestionOutputModel } from '../api/admin/models/quiz.question.output.model';
@@ -25,9 +25,7 @@ export class ViewModel<E> {
 }
 @Injectable()
 export class QuizQuestionQueryRepository {
-  constructor(
-    @InjectRepository(QuizQuestionEntity) protected readonly questionRepository: Repository<QuizQuestionEntity>,
-  ) {}
+  constructor(@InjectRepository(QuizQuestion) protected readonly questionRepository: Repository<QuizQuestion>) {}
 
   async getOneQuestion(id: string): Promise<InterlayerNotice<QuizQuestionOutputModel>> {
     const interlayerNotice: InterlayerNotice<QuizQuestionOutputModel> = new InterlayerNotice<QuizQuestionOutputModel>();
@@ -42,10 +40,8 @@ export class QuizQuestionQueryRepository {
     }
   }
 
-  async getManyQuestion(query: QueryQuizQuestionRequestType): Promise<InterlayerNotice<ViewModel<QuizQuestionEntity>>> {
-    const interlayerNotice: InterlayerNotice<ViewModel<QuizQuestionEntity>> = new InterlayerNotice<
-      ViewModel<QuizQuestionEntity>
-    >();
+  async getManyQuestion(query: QueryQuizQuestionRequestType): Promise<InterlayerNotice<ViewModel<QuizQuestion>>> {
+    const interlayerNotice: InterlayerNotice<ViewModel<QuizQuestion>> = new InterlayerNotice<ViewModel<QuizQuestion>>();
     try {
       const result = await this.questionRepository
         .createQueryBuilder('qq')
@@ -55,11 +51,7 @@ export class QuizQuestionQueryRepository {
         .take(query.pageSize)
         .orderBy('qq.' + query.sortBy, query.sortDirection)
         .getManyAndCount();
-      const viewModel: ViewModel<QuizQuestionEntity> = new ViewModel<QuizQuestionEntity>(
-        result,
-        query.pageNumber,
-        query.pageSize,
-      );
+      const viewModel: ViewModel<QuizQuestion> = new ViewModel<QuizQuestion>(result, query.pageNumber, query.pageSize);
       interlayerNotice.addData(viewModel);
       return interlayerNotice;
     } catch (err) {

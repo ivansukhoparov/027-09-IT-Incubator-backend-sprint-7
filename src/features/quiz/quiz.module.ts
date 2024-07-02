@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { QuizQuestionEntity } from './questions/infrastructure/entities/quiz.question.entity';
+import { QuizQuestion } from './questions/infrastructure/entities/quiz.question.entity';
 import { QuizQuestionsAdminController } from './questions/api/admin/quiz.questions.admin.controller';
 import { CreateQuizQuestionUseCase } from './questions/use.cases/create.question.use.case';
 import { QuizQuestionRepository } from './questions/infrastructure/quiz.question.repository';
@@ -19,7 +19,7 @@ const questionsUseCases = [
 
 const useCases = [...questionsUseCases];
 @Module({
-  imports: [CqrsModule, TypeOrmModule.forFeature([QuizQuestionEntity])],
+  imports: [CqrsModule, TypeOrmModule.forFeature([QuizQuestion])],
   controllers: [QuizQuestionsAdminController],
   providers: [QuizQuestionRepository, QuizQuestionQueryRepository, ...useCases],
   exports: [],

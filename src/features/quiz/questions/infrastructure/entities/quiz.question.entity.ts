@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class QuizQuestionEntity {
+export class QuizQuestion {
   @PrimaryGeneratedColumn('uuid')
   public id: string;
 

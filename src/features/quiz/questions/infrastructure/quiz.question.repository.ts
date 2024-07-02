@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
-import { QuizQuestionEntity } from './entities/quiz.question.entity';
+import { QuizQuestion } from './entities/quiz.question.entity';
 import { query } from 'express';
 import { ERRORS_CODES, InterlayerNotice } from '../../../../base/models/interlayer.notice';
 import { CreateQuestionDto, PublishQuestionDto, UpdateQuestionDto } from '../types/input';
@@ -10,14 +10,14 @@ import { CreateQuestionDto, PublishQuestionDto, UpdateQuestionDto } from '../typ
 export class QuizQuestionRepository {
   constructor(
     @InjectDataSource() protected readonly dataSource: DataSource,
-    @InjectRepository(QuizQuestionEntity) protected readonly questionRepository: Repository<QuizQuestionEntity>,
+    @InjectRepository(QuizQuestion) protected readonly questionRepository: Repository<QuizQuestion>,
   ) {}
 
   async addNewQuestion(createModel: CreateQuestionDto): Promise<InterlayerNotice<string>> {
     const interlayerNotice: InterlayerNotice<string> = new InterlayerNotice<string>();
     try {
-      const newQuestion: QuizQuestionEntity = this.questionRepository.create(createModel);
-      const result: QuizQuestionEntity = await this.questionRepository.save(newQuestion);
+      const newQuestion: QuizQuestion = this.questionRepository.create(createModel);
+      const result: QuizQuestion = await this.questionRepository.save(newQuestion);
       interlayerNotice.addData(result.id);
       return interlayerNotice;
     } catch (err) {
