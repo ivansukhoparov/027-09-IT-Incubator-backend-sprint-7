@@ -9,7 +9,7 @@ import { GetAllUsersUseCase } from './use.cases/get.all.users.use.case';
 import { BcryptAdapter } from '../../common/adapters/bcrypt.adapter';
 import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserTokensEntity } from './infrastructure/enities/user.tokens.entity';
+import { UserTokensMetaData } from './infrastructure/enities/user.tokens.entity';
 import { User } from './infrastructure/enities/user.entity';
 
 const useCases = [CreateUserUseCase, DeleteUserUseCase];
@@ -17,7 +17,7 @@ const useCases = [CreateUserUseCase, DeleteUserUseCase];
 const queryCases = [GetAllUsersUseCase];
 
 @Module({
-  imports: [CqrsModule, TypeOrmModule.forFeature([User, UserTokensEntity])],
+  imports: [CqrsModule, TypeOrmModule.forFeature([User, UserTokensMetaData])],
   controllers: [AdminUsersController],
   providers: [BcryptAdapter, UsersService, UsersRepository, UsersQueryRepository, ...useCases, ...queryCases],
   exports: [UsersService, UsersQueryRepository, BcryptAdapter],
