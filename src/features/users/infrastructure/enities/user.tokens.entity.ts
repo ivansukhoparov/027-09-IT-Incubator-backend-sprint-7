@@ -1,8 +1,8 @@
 import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn } from 'typeorm';
-import { User } from './user';
+import { User } from './user.entity';
 
-@Entity()
-export class UserTokens {
+@Entity('UserTokensMetaData')
+export class UserTokensMetaData {
   @OneToOne(() => User)
   @JoinColumn()
   user: User;
