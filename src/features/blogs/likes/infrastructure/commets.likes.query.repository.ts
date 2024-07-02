@@ -14,7 +14,9 @@ export class CommentsLikesQueryRepository {
     let likeStatus: LikeStatusType = 'None';
 
     if (userId) {
-      const userLike = await this.commentLikesModel.findOne({ $and: [{ commentId: commentId }, { likeOwnerId: userId }] }).lean();
+      const userLike = await this.commentLikesModel
+        .findOne({ $and: [{ commentId: commentId }, { likeOwnerId: userId }] })
+        .lean();
       if (userLike) {
         likeStatus = userLike.status;
       }

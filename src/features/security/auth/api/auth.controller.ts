@@ -1,4 +1,16 @@
-import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards, Res, Get, Req, UnauthorizedException, BadRequestException } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Post,
+  UseGuards,
+  Res,
+  Get,
+  Req,
+  UnauthorizedException,
+  BadRequestException,
+} from '@nestjs/common';
 import { UserConfirmationCodeDto } from '../types/input';
 import { AuthService } from '../application/auth.service';
 import { LoginInputModel, UserEmailDto } from './models/login.input.model';

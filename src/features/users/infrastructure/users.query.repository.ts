@@ -4,7 +4,7 @@ import { DataSource, Repository } from 'typeorm';
 import { UserOutputMeType } from '../types/output';
 import { UserOutputModel } from '../api/admin/models/user.ouput.model';
 import { QuerySortType, SearchType } from '../../../common/types/types';
-import { User } from './enities/user';
+import { User } from './enities/user.entity';
 
 @Injectable()
 export class UsersQueryRepository {

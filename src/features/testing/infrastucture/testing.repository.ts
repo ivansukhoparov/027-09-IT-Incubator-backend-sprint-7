@@ -20,13 +20,15 @@ export class TestingRepository {
   }
 
   async deleteAll() {
-    const tables = await this.dataSource.query(`SELECT "table_name" FROM information_schema.tables  where table_schema='public'`);
+    const tables = await this.dataSource.query(
+      `SELECT "table_name" FROM information_schema.tables  where table_schema='public'`,
+    );
     const deleteAllQuery = tables
       .map((table: any) => {
         return `DELETE FROM "${table.table_name}"`;
       })
       .join(';');
     await this.dataSource.query(deleteAllQuery);
-    await this.dropMongoDb();
+    //  await this.dropMongoDb();
   }
 }

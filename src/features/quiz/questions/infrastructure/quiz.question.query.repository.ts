@@ -25,7 +25,9 @@ export class ViewModel<E> {
 }
 @Injectable()
 export class QuizQuestionQueryRepository {
-  constructor(@InjectRepository(QuizQuestionEntity) protected readonly questionRepository: Repository<QuizQuestionEntity>) {}
+  constructor(
+    @InjectRepository(QuizQuestionEntity) protected readonly questionRepository: Repository<QuizQuestionEntity>,
+  ) {}
 
   async getOneQuestion(id: string): Promise<InterlayerNotice<QuizQuestionOutputModel>> {
     const interlayerNotice: InterlayerNotice<QuizQuestionOutputModel> = new InterlayerNotice<QuizQuestionOutputModel>();

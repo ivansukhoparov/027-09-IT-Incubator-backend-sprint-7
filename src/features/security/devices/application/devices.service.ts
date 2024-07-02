@@ -7,7 +7,7 @@ import { UserDocument } from '../../../users/infrastructure/users.schema';
 import { InterlayerNotice } from '../../../../base/models/interlayer.notice';
 import { SessionInputModel, SessionModel, SessionUpdateModel } from '../api/models/session.input.models';
 import { TokenPair } from '../../auth/types/output';
-import { User } from '../../../users/infrastructure/enities/user';
+import { User } from '../../../users/infrastructure/enities/user.entity';
 
 @Injectable()
 export class DevicesService {

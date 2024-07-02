@@ -8,6 +8,7 @@ export class TestingService {
   async deleteAll() {
     try {
       //this.testingRepository.dropDb();
+      console.log('main method run');
       await this.testingRepository.deleteAll();
     } catch {
       console.log('main method has failed, try additional method');

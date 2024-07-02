@@ -12,7 +12,10 @@ export abstract class TestManagerBase<EntityOutputModel> {
   ) {}
 
   async createOne(createModel: any = this.createModel) {
-    return await request(this.app.getHttpServer()).post(this.endPoint).auth(this.accessData.user, this.accessData.password).send(createModel);
+    return await request(this.app.getHttpServer())
+      .post(this.endPoint)
+      .auth(this.accessData.user, this.accessData.password)
+      .send(createModel);
   }
 
   createMany = async (numberOfEntities: number) => {

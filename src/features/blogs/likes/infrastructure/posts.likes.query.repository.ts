@@ -11,7 +11,9 @@ export class PostsLikesQueryRepository {
     let likeStatus: LikeStatusType = 'None';
 
     if (userId) {
-      const userLike = await this.postsLikesModel.findOne({ $and: [{ postId: postId }, { likeOwnerId: userId }] }).lean();
+      const userLike = await this.postsLikesModel
+        .findOne({ $and: [{ postId: postId }, { likeOwnerId: userId }] })
+        .lean();
       if (userLike) {
         likeStatus = userLike.status;
       }

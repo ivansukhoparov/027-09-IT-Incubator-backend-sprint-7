@@ -93,7 +93,11 @@ export class PostsController {
 
   @Post(':postId/comments')
   @UseGuards(AuthGuard)
-  async createNewCommentToPost(@Req() req: any, @Param('postId') postId: string, @Body() inputModel: CommentCreateInputModel) {
+  async createNewCommentToPost(
+    @Req() req: any,
+    @Param('postId') postId: string,
+    @Body() inputModel: CommentCreateInputModel,
+  ) {
     const authHeader = req.header('authorization')?.split(' ');
     const accessTokenPayload = this.accessToken.decode(authHeader[1]);
     const userId = accessTokenPayload.userId;

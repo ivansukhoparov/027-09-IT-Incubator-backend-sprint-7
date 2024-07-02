@@ -84,7 +84,9 @@ class AppSettings {
   ) {}
 }
 
-const env = new EnvironmentSettings((Environments.includes(process.env.ENV?.trim()) ? process.env.ENV.trim() : 'DEVELOPMENT') as EnvironmentsTypes);
+const env = new EnvironmentSettings(
+  (Environments.includes(process.env.ENV?.trim()) ? process.env.ENV.trim() : 'DEVELOPMENT') as EnvironmentsTypes,
+);
 
 const api = new APISettings(process.env);
 export const appSettings = new AppSettings(env, api);

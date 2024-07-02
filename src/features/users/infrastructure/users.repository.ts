@@ -3,7 +3,7 @@ import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
 import { CreateUserDto } from '../types/output';
 import { UserUpdateDto } from '../types/input';
-import { User } from './enities/user';
+import { User } from './enities/user.entity';
 import { InterlayerNotice } from '../../../base/models/interlayer.notice';
 
 @Injectable()

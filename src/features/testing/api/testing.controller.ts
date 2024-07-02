@@ -7,6 +7,7 @@ export class TestingController {
   @Delete('/all-data/')
   @HttpCode(HttpStatus.NO_CONTENT)
   async deleteAllData() {
+    console.log('tasting');
     await this.testingService.deleteAll();
     return;
   }

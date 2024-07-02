@@ -1,11 +1,29 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, NotFoundException, Param, Post, Put, Query, UseGuards, Req } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  NotFoundException,
+  Param,
+  Post,
+  Put,
+  Query,
+  UseGuards,
+  Req,
+} from '@nestjs/common';
 import { BlogsService } from '../../application/blogs.service';
 import { BlogsQueryRepository } from '../../infrastructure/blogs.query.repository';
 import { PostsService } from '../../../posts/application/posts.service';
 import { PostsQueryRepository } from '../../../posts/infrastructure/posts.query.repository';
 import { CreateBlogInputModel, UpdateBlogInputModel } from './models/blogs.input.models';
 import { Request } from 'express';
-import { CreatePostInputModel, CreatePostInputModelByBlog, UpdatePostInputModel } from '../../../posts/api/models/posts.input.models';
+import {
+  CreatePostInputModel,
+  CreatePostInputModelByBlog,
+  UpdatePostInputModel,
+} from '../../../posts/api/models/posts.input.models';
 import { QueryUsersRequestType } from '../../../../users/types/input';
 import { createQuery } from '../../../../common/create.query';
 import { AccessToken } from '../../../../../common/token.services/access-token.service';
@@ -81,7 +99,11 @@ export class AdminBlogsController {
 
   @Put(':blogId/posts/:postId')
   @HttpCode(HttpStatus.NO_CONTENT)
-  async updatePostById(@Param('postId') postId: string, @Param('blogId') blogId: string, @Body() inputModel: UpdatePostInputModel) {
+  async updatePostById(
+    @Param('postId') postId: string,
+    @Param('blogId') blogId: string,
+    @Body() inputModel: UpdatePostInputModel,
+  ) {
     const isBLogExist = await this.blogsService.isBLogExist(blogId);
     if (isBLogExist) {
       await this.postsService.updatePost(postId, inputModel, blogId);

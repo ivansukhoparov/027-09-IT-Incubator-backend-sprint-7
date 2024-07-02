@@ -26,7 +26,10 @@ export class QuizQuestionRepository {
     }
   }
 
-  async updateQuestion(updateModel: UpdateQuestionDto | PublishQuestionDto, id: string): Promise<InterlayerNotice<boolean>> {
+  async updateQuestion(
+    updateModel: UpdateQuestionDto | PublishQuestionDto,
+    id: string,
+  ): Promise<InterlayerNotice<boolean>> {
     const interlayerNotice: InterlayerNotice<boolean> = new InterlayerNotice<boolean>();
     try {
       const result = await this.questionRepository.update({ id: id }, { ...updateModel });

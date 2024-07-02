@@ -163,7 +163,10 @@ export class AuthService {
   //
   // }
 
-  async loginUser(loginDto: LoginInputModel, sessionInputModel: SessionInputModel): Promise<InterlayerNotice<TokenPair>> {
+  async loginUser(
+    loginDto: LoginInputModel,
+    sessionInputModel: SessionInputModel,
+  ): Promise<InterlayerNotice<TokenPair>> {
     const interlayerNotice: InterlayerNotice<TokenPair> = new InterlayerNotice<TokenPair>();
     const user = await this.userService.getUserByLoginOrEmail(loginDto.loginOrEmail);
 

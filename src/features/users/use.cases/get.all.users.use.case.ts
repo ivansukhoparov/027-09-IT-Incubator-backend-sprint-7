@@ -52,7 +52,12 @@ export class GetAllUsersUseCase implements IQueryHandler<GetAllUsersQuery> {
     const skippedDocuments = (+query.sortData.pageNumber - 1) * +query.sortData.pageSize; // Calculate count of skipped docs before requested page
 
     // Get documents from DB
-    const users = await this.usersQueryRepository.getMany(query.searchData, query.sortData, +skippedDocuments, +query.sortData.pageSize);
+    const users = await this.usersQueryRepository.getMany(
+      query.searchData,
+      query.sortData,
+      +skippedDocuments,
+      +query.sortData.pageSize,
+    );
 
     return {
       pagesCount: pageCount,

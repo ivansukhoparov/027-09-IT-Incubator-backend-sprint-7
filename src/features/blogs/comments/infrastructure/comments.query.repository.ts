@@ -15,7 +15,11 @@ export class CommentsQueryRepository {
     protected commentsLikesQueryRepository: CommentsLikesQueryRepository,
     protected postsService: PostsService,
   ) {}
-  async getAllCommentsByPostId(sortData: QuerySortType, postId: string, userId?: string): Promise<ViewModelType<OutputCommentType> | null> {
+  async getAllCommentsByPostId(
+    sortData: QuerySortType,
+    postId: string,
+    userId?: string,
+  ): Promise<ViewModelType<OutputCommentType> | null> {
     try {
       await this.postsService.findById(postId);
 

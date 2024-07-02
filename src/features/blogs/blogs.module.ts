@@ -31,9 +31,21 @@ const controllers = [AdminBlogsController, PublicBlogsController, PostsControlle
 
 const services = [BlogsService, PostsService, CommentsService, CommentsLikesService, PostsLikesService];
 
-const repositories = [BlogsRepository, PostsRepository, CommentsRepository, CommentsLikesRepository, PostsLikesQueryRepository, PostsLikesRepository];
+const repositories = [
+  BlogsRepository,
+  PostsRepository,
+  CommentsRepository,
+  CommentsLikesRepository,
+  PostsLikesQueryRepository,
+  PostsLikesRepository,
+];
 
-const queryRepositories = [BlogsQueryRepository, PostsQueryRepository, CommentsQueryRepository, CommentsLikesQueryRepository];
+const queryRepositories = [
+  BlogsQueryRepository,
+  PostsQueryRepository,
+  CommentsQueryRepository,
+  CommentsLikesQueryRepository,
+];
 
 const providers = [IsBlogExistConstraint];
 

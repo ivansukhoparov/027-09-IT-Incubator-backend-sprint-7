@@ -82,7 +82,11 @@ export class CommentsController {
   @Put(':commentId/like-status')
   @UseGuards(AuthGuard)
   @HttpCode(HttpStatus.NO_CONTENT)
-  async updateLikeStatus(@Param('commentId') commentId: string, @Body() inputModel: CommentsLikesInputModel, @Req() req: any) {
+  async updateLikeStatus(
+    @Param('commentId') commentId: string,
+    @Body() inputModel: CommentsLikesInputModel,
+    @Req() req: any,
+  ) {
     const isCommentExist = await this.commentsService.isCommentExist(commentId);
     if (!isCommentExist) throw new NotFoundException();
     const authHeader = req.header('authorization')?.split(' ');
