@@ -1,4 +1,5 @@
-import { BadRequestException, HttpException, HttpStatus } from '@nestjs/common';
+import { BadRequestException, HttpException, HttpStatus, NotFoundException } from '@nestjs/common';
+import { errorContext } from 'rxjs/internal/util/errorContext';
 
 export class InterlayerNotice<D = null> {
   public data: D | null = null;
@@ -29,6 +30,7 @@ export class InterlayerNotice<D = null> {
 export const ERRORS_CODES = {
   BAD_REQUEST: 400,
   UNAUTHORIZED: 401,
+  NOT_FOUND: 404,
   EMAIL_SEND_ERROR: 1001,
   ALREADY_CONFIRMED: 1002,
   INVALID_TOKEN: 1003,
@@ -45,6 +47,15 @@ export const interlayerNoticeHandler = (interlayerNotice: InterlayerNotice<any>)
           {
             message: interlayerNotice.extension.msg,
             field: interlayerNotice.extension.key,
+          },
+        ],
+      });
+    } else if (interlayerNotice.code === ERRORS_CODES.NOT_FOUND) {
+      throw new NotFoundException({
+        errorsMessages: [
+          {
+            message: interlayerNotice.extension.msg,
+            // field: interlayerNotice.extension.key,
           },
         ],
       });
