@@ -13,15 +13,15 @@ export class HttpExceptionFilter implements ExceptionFilter {
   }
 }
 
-@Catch(Error)
-export class ErrorsExceptionFilter implements ExceptionFilter {
-  catch(exception: Error, host: ArgumentsHost) {
-    const ctx = host.switchToHttp();
-    const response = ctx.getResponse<Response>();
-    const request = ctx.getRequest<Request>();
-    const error = exception.name;
-
-    console.log(exception);
-    //response.status(status).json(exception.getResponse());
-  }
-}
+// @Catch(Error)
+// export class ErrorsExceptionFilter implements ExceptionFilter {
+//   catch(exception: Error, host: ArgumentsHost) {
+//     const ctx = host.switchToHttp();
+//     const response = ctx.getResponse<Response>();
+//     const request = ctx.getRequest<Request>();
+//     const error = exception.name;
+//
+//     console.log(exception);
+//     //response.status(status).json(exception.getResponse());
+//   }
+// }
