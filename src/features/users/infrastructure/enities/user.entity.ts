@@ -1,4 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { PostLike } from '../../../blogs/likes/infrastructure/entities/post.likes.entity';
+import { CommentLike } from '../../../blogs/likes/infrastructure/entities/comment.likes.entity';
+import { Comment } from '../../../blogs/comments/infrastructure/entities/comment.entity';
 
 @Entity()
 export class User {
@@ -19,4 +22,13 @@ export class User {
 
   @Column({ default: false })
   isConfirmed: boolean;
+
+  @OneToMany(() => PostLike, (postLike) => postLike.owner)
+  postLikes: PostLike[];
+
+  @OneToMany(() => CommentLike, (commentLike) => commentLike.owner)
+  commentLikes: CommentLike[];
+
+  @OneToMany(() => Comment, (comment) => comment.owner)
+  comments: Comment[];
 }
