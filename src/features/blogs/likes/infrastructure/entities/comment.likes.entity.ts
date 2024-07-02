@@ -17,7 +17,7 @@ export class CommentLike {
   @Column()
   ownerId: string;
 
-  @ManyToOne(() => Comment, (post) => comment.likes)
+  @ManyToOne(() => Comment, (comment) => comment.likes)
   comment: Comment;
 
   @ManyToOne(() => User, (owner) => owner.commentLikes)

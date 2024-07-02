@@ -1,9 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { LikeStatusType } from '../../../likes/types/input';
 import { Post } from '../../../posts/infrastructure/entities/post.entity';
 import { User } from '../../../../users/infrastructure/enities/user.entity';
 import { Prop } from '@nestjs/mongoose';
 import { CommentatorInfo } from '../comments.schema';
+import { CommentLike } from '../../../likes/infrastructure/entities/comment.likes.entity';
 
 @Entity()
 export class Comment {
@@ -27,4 +28,7 @@ export class Comment {
 
   @ManyToOne(() => User, (owner) => owner.comments)
   owner: User;
+
+  @OneToMany(() => CommentLike, (comnentLike) => comnentLike.comment)
+  likes: CommentLike[];
 }
