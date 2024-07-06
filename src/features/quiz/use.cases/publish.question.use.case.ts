@@ -1,7 +1,7 @@
 import { QuizQuestionCreateInputModel } from '../api/admin/models/quiz.question.create.input.model';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { QuizQuestionRepository } from '../infrastructure/quiz.question.repository';
-import { InterlayerNotice } from '../../../../base/models/interlayer.notice';
+import { InterlayerNotice } from '../../../base/models/interlayer.notice';
 import { CreateQuestionDto, PublishQuestionDto, UpdateQuestionDto } from '../types/input';
 import { QuizQuestionUpdateInputModel } from '../api/admin/models/quiz.question.update.input.model';
 import { QuizQuestionPublishInputModel } from '../api/admin/models/quiz.question.publish.input.model';

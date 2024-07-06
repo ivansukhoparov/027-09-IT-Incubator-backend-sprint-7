@@ -1,7 +1,7 @@
-import { IsStringLength } from '../../../../../../infrastructure/decorators/validate/is.string.length';
+import { IsStringLength } from '../../../../../infrastructure/decorators/validate/is.string.length';
 import { IsNotEmpty } from 'class-validator';
 
-export class QuizQuestionUpdateInputModel {
+export class QuizQuestionCreateInputModel {
   @IsStringLength(10, 500)
   public body: string;
 

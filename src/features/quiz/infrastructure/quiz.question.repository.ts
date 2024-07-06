@@ -3,7 +3,7 @@ import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
 import { QuizQuestion } from './entities/quiz.question.entity';
 import { query } from 'express';
-import { ERRORS_CODES, InterlayerNotice } from '../../../../base/models/interlayer.notice';
+import { ERRORS_CODES, InterlayerNotice } from '../../../base/models/interlayer.notice';
 import { CreateQuestionDto, PublishQuestionDto, UpdateQuestionDto } from '../types/input';
 
 @Injectable()

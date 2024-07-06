@@ -11,13 +11,13 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { AdminAuthGuard } from '../../../../../infrastructure/guards/admin-auth-guard.service';
+import { AdminAuthGuard } from '../../../../infrastructure/guards/admin-auth-guard.service';
 import { QuizQuestionCreateInputModel } from './models/quiz.question.create.input.model';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { UsersQueryRepository } from '../../../../users/infrastructure/users.query.repository';
-import { UsersRepository } from '../../../../users/infrastructure/users.repository';
+import { UsersQueryRepository } from '../../../users/infrastructure/users.query.repository';
+import { UsersRepository } from '../../../users/infrastructure/users.repository';
 import { CreateQuizQuestionCommand } from '../../use.cases/create.question.use.case';
-import { InterlayerNotice, interlayerNoticeHandler } from '../../../../../base/models/interlayer.notice';
+import { InterlayerNotice, interlayerNoticeHandler } from '../../../../base/models/interlayer.notice';
 import { QuizQuestionQueryRepository } from '../../infrastructure/quiz.question.query.repository';
 import { QueryQuizQuestionRequestType } from '../../types/input';
 import { QuizQuestionUpdateInputModel } from './models/quiz.question.update.input.model';

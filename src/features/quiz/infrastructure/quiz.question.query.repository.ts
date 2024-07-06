@@ -3,10 +3,10 @@ import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
 import { QuizQuestion } from './entities/quiz.question.entity';
 import { query } from 'express';
-import { ERRORS_CODES, InterlayerNotice } from '../../../../base/models/interlayer.notice';
+import { ERRORS_CODES, InterlayerNotice } from '../../../base/models/interlayer.notice';
 import { QuizQuestionOutputModel } from '../api/admin/models/quiz.question.output.model';
 import { QueryQuizQuestionRequestType } from '../types/input';
-import { userMapper } from '../../../users/types/mapper';
+import { userMapper } from '../../users/types/mapper';
 
 export class ViewModel<E> {
   pagesCount: number;
