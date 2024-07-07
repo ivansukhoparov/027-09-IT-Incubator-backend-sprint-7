@@ -6,10 +6,9 @@ export type CommentCreateDto = {
   content: string;
   postId: string;
   userId: string;
-  userLogin: string;
 };
 
-export type UpdateCommentDto = {
+export type CommentUpdateDto = {
   content: string;
 };
 
