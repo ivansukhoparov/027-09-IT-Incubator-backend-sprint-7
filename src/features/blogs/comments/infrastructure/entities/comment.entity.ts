@@ -5,9 +5,10 @@ import { User } from '../../../../users/infrastructure/enities/user.entity';
 import { Prop } from '@nestjs/mongoose';
 import { CommentatorInfo } from '../comments.schema';
 import { CommentLike } from '../../../likes/infrastructure/entities/comment.likes.entity';
+import { BaseEntity } from '../../../../../base/base.classes/base.entity';
 
 @Entity()
-export class Comment {
+export class Comment extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -29,6 +30,6 @@ export class Comment {
   @ManyToOne(() => User, (owner) => owner.comments)
   owner: User;
 
-  @OneToMany(() => CommentLike, (comnentLike) => comnentLike.comment)
+  @OneToMany(() => CommentLike, (commentLike) => commentLike.comment)
   likes: CommentLike[];
 }

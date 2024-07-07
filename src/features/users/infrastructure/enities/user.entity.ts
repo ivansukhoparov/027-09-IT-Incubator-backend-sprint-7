@@ -2,9 +2,10 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { PostLike } from '../../../blogs/likes/infrastructure/entities/post.likes.entity';
 import { CommentLike } from '../../../blogs/likes/infrastructure/entities/comment.likes.entity';
 import { Comment } from '../../../blogs/comments/infrastructure/entities/comment.entity';
+import { BaseEntity } from '../../../../base/base.classes/base.entity';
 
 @Entity()
-export class User {
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

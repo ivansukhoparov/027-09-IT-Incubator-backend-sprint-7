@@ -1,26 +1,27 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Post } from '../../../posts/infrastructure/entities/post.entity';
+import { BaseEntity } from '../../../../../base/base.classes/base.entity';
 
 @Entity()
-export class Blog {
+export class Blog extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  public id: string;
 
   @Column({ type: 'character varying', nullable: false })
-  name: string;
+  public name: string;
 
   @Column({ type: 'character varying', nullable: false })
-  description: string;
+  public description: string;
 
   @Column({ type: 'character varying', nullable: false })
-  websiteUrl: string;
+  public websiteUrl: string;
 
   @Column({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
   public createdAt: Date;
 
   @Column({ default: false })
-  isMembership: boolean;
+  public isMembership: boolean;
 
   @OneToMany(() => Post, (post) => post.blog)
-  posts: Post[];
+  public posts: Post[];
 }

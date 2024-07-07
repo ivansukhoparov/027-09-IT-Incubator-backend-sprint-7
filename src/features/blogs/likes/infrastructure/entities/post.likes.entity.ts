@@ -4,9 +4,10 @@ import { Prop } from '@nestjs/mongoose';
 import { LikeStatusType } from '../../types/input';
 import { Post } from '../../../posts/infrastructure/entities/post.entity';
 import { User } from '../../../../users/infrastructure/enities/user.entity';
+import { BaseEntity } from '../../../../../base/base.classes/base.entity';
 
 @Entity()
-export class PostLike {
+export class PostLike extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
