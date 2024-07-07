@@ -2,7 +2,7 @@ import { CommentsRepository } from '../infrastructure/comments.repository';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { UpdateCommentInputModel } from '../api/models/comments.input.models';
 import { CommentCreateDto } from '../types/input';
-import { Comments } from '../infrastructure/comments.schema';
+import { CommentDocument, CommentsMongo } from '../infrastructure/comments.schema';
 import { PostsService } from '../../posts/application/posts.service';
 
 @Injectable()
@@ -14,7 +14,7 @@ export class CommentsService {
 
   async getCommentById(id: string) {
     try {
-      return await this.commentsRepository.getCommentById(id);
+      return await this.commentsRepository.getById(id);
     } catch {
       throw new NotFoundException();
     }
@@ -22,27 +22,27 @@ export class CommentsService {
 
   async createComment(createDto: CommentCreateDto): Promise<string> {
     try {
-      const createdAt = new Date();
+      // const createdAt = new Date();
 
       await this.postService.findById(createDto.postId);
 
-      const commentCreateModel: Comments = {
-        content: createDto.content,
-        postId: createDto.postId,
-        commentatorInfo: {
-          userId: createDto.userId,
-          userLogin: createDto.userLogin,
-        },
-        createdAt: createdAt.toISOString(),
-      };
-      return await this.commentsRepository.createComment(commentCreateModel);
+      // const commentCreateModel: CommentsMongo = {
+      //   content: createDto.content,
+      //   postId: createDto.postId,
+      //   commentatorInfo: {
+      //     userId: createDto.userId,
+      //     userLogin: createDto.userLogin,
+      //   },
+      //   createdAt: createdAt.toISOString(),
+      // };
+      return await this.commentsRepository.create(createDto);
     } catch {
       throw new NotFoundException();
     }
   }
   async updateComment(id: string, updateModel: UpdateCommentInputModel) {
     try {
-      const comment = await this.commentsRepository.updateComment(id, updateModel);
+      return await this.commentsRepository.update(id, updateModel);
     } catch {
       throw new NotFoundException();
     }
@@ -50,14 +50,13 @@ export class CommentsService {
 
   async deleteComment(id: string) {
     try {
-      await this.commentsRepository.deleteComment(id);
-      return true;
+      return await this.commentsRepository.delete(id);
     } catch {
       throw new NotFoundException();
     }
   }
 
   async isCommentExist(id: string) {
-    return await this.commentsRepository.isCommentExist(id);
+    return await this.commentsRepository.isExist(id);
   }
 }

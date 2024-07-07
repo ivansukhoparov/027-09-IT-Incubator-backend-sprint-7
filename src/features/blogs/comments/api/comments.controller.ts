@@ -5,13 +5,10 @@ import {
   Param,
   Put,
   UseGuards,
-  Post,
   Req,
   Body,
   HttpStatus,
   HttpCode,
-  UnauthorizedException,
-  ForbiddenException,
   NotFoundException,
 } from '@nestjs/common';
 import { CommentsQueryRepository } from '../infrastructure/comments.query.repository';
@@ -20,7 +17,6 @@ import { CommentsService } from '../application/comments.service';
 import { CommentsLikesService } from '../../likes/application/comments.likes.service';
 import { CommentsLikesInputModel } from '../../likes/api/models/likes.input.models';
 import { UpdateCommentInputModel } from './models/comments.input.models';
-import { CommentDocument } from '../infrastructure/comments.schema';
 import { UsersService } from '../../../users/application/users.service';
 import { AccessToken } from '../../../../common/token.services/access-token.service';
 import { AuthGuard } from '../../../../infrastructure/guards/admin-auth-guard.service';
@@ -55,10 +51,10 @@ export class CommentsController {
     const authHeader = req.header('authorization')?.split(' ');
     const accessTokenPayload = this.accessToken.decode(authHeader[1]);
     const userId = accessTokenPayload.userId;
-    const comment: CommentDocument = await this.commentsService.getCommentById(id);
-    if (userId != comment.commentatorInfo.userId) {
-      throw new ForbiddenException();
-    }
+    const comment = await this.commentsService.getCommentById(id);
+    // if (userId != comment.commentatorInfo.userId) {
+    //   throw new ForbiddenException();
+    // }
     await this.commentsService.updateComment(id, inputModel);
     return;
   }
@@ -70,11 +66,11 @@ export class CommentsController {
     const authHeader = req.header('authorization')?.split(' ');
     const accessTokenPayload = this.accessToken.decode(authHeader[1]);
     const userId = accessTokenPayload.userId;
-    const comment: CommentDocument = await this.commentsService.getCommentById(id);
+    const comment = await this.commentsService.getCommentById(id);
 
-    if (userId != comment.commentatorInfo.userId) {
-      throw new ForbiddenException();
-    }
+    // if (userId != comment.commentatorInfo.userId) {
+    //   throw new ForbiddenException();
+    // }
     await this.commentsService.deleteComment(id);
     return;
   }
