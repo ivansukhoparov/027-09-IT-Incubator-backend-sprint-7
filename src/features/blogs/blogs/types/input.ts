@@ -2,6 +2,7 @@ export type BlogCreateDto = {
   name: string;
   description: string;
   websiteUrl: string;
+  isMembership: boolean;
 };
 
 export type BlogUpdateDto = {
