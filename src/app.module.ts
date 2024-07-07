@@ -6,6 +6,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PluralNamingStrategy } from './common/strategies/plural.naming.strategy';
 import { QuizModule } from './features/quiz/quiz.module';
 import { TestingModule } from './features/testing/testing.module';
+import { BlogsModule } from './features/blogs/blogs.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import { appSettings } from './settings/app.settings';
+import { ThrottlerModule } from '@nestjs/throttler';
 
 const typeOrmModule = TypeOrmModule.forRoot({
   type: 'postgres',
@@ -20,10 +24,17 @@ const typeOrmModule = TypeOrmModule.forRoot({
   synchronize: false,
 });
 
-const appModules = [UsersModule, QuizModule, TestingModule];
+const throttleModule = ThrottlerModule.forRoot([
+  {
+    ttl: 10000,
+    limit: 500,
+  },
+]);
+const mongoModule = MongooseModule.forRoot(appSettings.api.MONGO_CONNECTION_URI + '/' + appSettings.api.MONGO_DB_NAME);
+const appModules = [UsersModule, QuizModule, TestingModule, BlogsModule];
 
 @Module({
-  imports: [typeOrmModule, ...appModules],
+  imports: [throttleModule, typeOrmModule, mongoModule, ...appModules],
   controllers: [AppController],
   providers: [AppService],
 })
