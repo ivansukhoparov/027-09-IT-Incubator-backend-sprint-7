@@ -12,13 +12,10 @@ export class UsersRepository {
 
   async createUser(newUserDto: CreateUserDto | User) {
     // const interlayerNotice: InterlayerNotice<string> = new InterlayerNotice<string>();
-    console.log('createUser');
     try {
       const response = await this.repository.save({ ...newUserDto });
-      console.log('createUser', response);
       return response.id;
     } catch (err) {
-      console.log(err);
       throw new NotFoundException();
     }
   }
@@ -26,7 +23,6 @@ export class UsersRepository {
   async getUserById(id: string) {
     try {
       const response = await this.repository.findOneBy({ id: id });
-      console.log('getUserById', response);
       return response;
     } catch {
       throw new NotFoundException();
